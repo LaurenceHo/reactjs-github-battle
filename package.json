@@ -10,9 +10,14 @@
   "author": "",
   "license": "ISC",
   "babel": {
-    "presets": ["env", "react"]
+    "presets": [
+      "env",
+      "react",
+      "es2015"
+    ]
   },
   "dependencies": {
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-router": "^4.2.0",

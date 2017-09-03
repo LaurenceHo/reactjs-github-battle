@@ -15,12 +15,18 @@ module.exports = {
 			path.join (__dirname, "dist"),
 			"node_modules"
 		],
-		extensions: [ '.js', '.jsx', '*' ]
+		extensions: [ '.js', '.jsx', '.json' ]
 	},
 	module: {
 		rules: [
-			{ test: /\.(jsx)$/, use: 'babel-loader' },
-			{ test: /\.css$/, use: [ 'style-loader', 'css-loader' ] }
+			{
+				test: /\.(jsx)$/,
+				use: 'babel-loader'
+			},
+			{
+				test: /\.css$/,
+				use: [ 'style-loader', 'css-loader' ]
+			}
 		]
 	},
 	plugins: [
