@@ -4,7 +4,7 @@ import { Popular } from './popular';
 export class App extends React.Component {
 	render () {
 		return (
-      <div class='container'>
+      <div className='container'>
           <Popular/>
       </div>
 		);
