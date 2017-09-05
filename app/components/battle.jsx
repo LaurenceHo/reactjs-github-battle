@@ -1,31 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
-function PlayerPreview (props) {
-	return (
-		<div>
-			<div className='column'>
-				<img
-					className='avatar'
-					src={props.avatar}
-					alt={'Avatar for ' + props.username}
-				/>
-				<h2 className='username'>@{props.username}</h2>
-			</div>
-			<button className='reset' onClick={props.onReset.bind (null, props.id)}>
-				Reset
-			</button>
-		</div>
-	);
-}
-
-PlayerPreview.propTypes = {
-	id: PropTypes.string.isRequired,
-	avatar: PropTypes.string.isRequired,
-	username: PropTypes.string.isRequired,
-	onReset: PropTypes.func.isRequired
-};
+import { PlayerPreview } from './playerReview';
 
 class PlayerInput extends React.Component {
 	constructor (props) {
@@ -136,10 +112,14 @@ export class Battle extends React.Component {
 						onSubmit={this.handleSubmit}/>}
 					{playerOneImage !== null &&
 					<PlayerPreview
-						id='playerOne'
 						avatar={playerOneImage}
-						username={playerOneName}
-						onReset={this.handleReset}/>}
+						username={playerOneName}>
+						<button
+							className='reset'
+							onClick={this.handleReset.bind (null, 'playerOne')}>
+							Reset
+						</button>
+					</PlayerPreview>}
 					{!playerTwoName &&
 					<PlayerInput
 						id='playerTwo'
@@ -147,10 +127,14 @@ export class Battle extends React.Component {
 						onSubmit={this.handleSubmit}/>}
 					{playerTwoImage !== null &&
 					<PlayerPreview
-						id='playerTwo'
 						avatar={playerTwoImage}
-						username={playerTwoName}
-						onReset={this.handleReset}/>}
+						username={playerTwoName}>
+						<button
+							className='reset'
+							onClick={this.handleReset.bind (null, 'playerTWo')}>
+							Reset
+						</button>
+					</PlayerPreview>}
 				</div>
 				{playerOneImage && playerTwoImage &&
 				<Link

@@ -54,13 +54,13 @@ function sortPlayers (players) {
 	});
 }
 
-export const battle = (players) => {
+export const Battle = (players) => {
 	return axios.all (players.map (getUserData))
 		.then (sortPlayers)
 		.catch (handleError);
 };
 
-export const fetchPopularRepos = (language) => {
+export const FetchPopularRepos = (language) => {
 	const encodedURI = window.encodeURI ('https://api.github.com/search/repositories?q=stars:>1+language:' + language + '&sort=stars&order=desc&type=Repositories');
 
 	return axios.get (encodedURI)

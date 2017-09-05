@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { fetchPopularRepos } from '../utils/api';
+import { FetchPopularRepos } from '../utils/api';
 
 export class Popular extends React.Component {
 	constructor (props) {
@@ -25,7 +25,7 @@ export class Popular extends React.Component {
 			}
 		});
 
-		fetchPopularRepos (lang)
+		FetchPopularRepos (lang)
 			.then (function (repos) {
 				this.setState (() => {
 					return {
