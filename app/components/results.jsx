@@ -6,7 +6,7 @@ import { Battle } from '../utils/api';
 import { PlayerPreview } from './playerReview';
 import { Loading } from './loading';
 
-function Profile (props) {
+const Profile = (props) => {
 	const info = props.info;
 
 	return (
@@ -24,13 +24,13 @@ function Profile (props) {
 			</ul>
 		</PlayerPreview>
 	)
-}
+};
 
 Profile.propTypes = {
 	info: PropTypes.object.isRequired,
 };
 
-function Player (props) {
+const Player = (props) => {
 	return (
 		<div>
 			<h1 className='header'>{props.label}</h1>
@@ -38,7 +38,7 @@ function Player (props) {
 			<Profile info={props.profile}/>
 		</div>
 	)
-}
+};
 
 Player.propTypes = {
 	label: PropTypes.string.isRequired,
