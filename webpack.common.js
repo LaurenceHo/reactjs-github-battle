@@ -8,7 +8,7 @@ module.exports = {
 	entry: './app/index.jsx',
 	output: {
 		path: path.resolve (__dirname, 'dist'),
-		filename: 'index_bundle.js'
+		filename: '[name].bundle.js'
 	},
 	resolve: {
 		modules: [
@@ -20,6 +20,16 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.js$/,
+				exclude: /(node_modules|bower_components)/,
+				use: {
+					loader: 'babel-loader',
+					query: {
+						presets: [ "es2015" ]
+					}
+				}
+			},
+			{
 				test: /\.(jsx)$/,
 				use: 'babel-loader'
 			},
@@ -28,9 +38,6 @@ module.exports = {
 				use: [ 'style-loader', 'css-loader' ]
 			}
 		]
-	},
-	devServer: {
-		historyApiFallback: true
 	},
 	plugins: [
 		new HtmlWebpackPlugin ({
