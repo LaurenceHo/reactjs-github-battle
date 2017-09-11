@@ -2,7 +2,6 @@
  * Created by laurence-ho on 02/09/17.
  */
 const path = require ('path');
-const HtmlWebpackPlugin = require ('html-webpack-plugin');
 
 module.exports = {
 	entry: './app/index.jsx',
@@ -21,7 +20,7 @@ module.exports = {
 		rules: [
 			{
 				test: /\.js$/,
-				exclude: /(node_modules|bower_components)/,
+				exclude: /(node_modules)/,
 				use: {
 					loader: 'babel-loader',
 					query: {
@@ -38,11 +37,6 @@ module.exports = {
 				use: [ 'style-loader', 'css-loader' ]
 			}
 		]
-	},
-	plugins: [
-		new HtmlWebpackPlugin ({
-			template: 'app/index.html'
-		})
-	]
+	}
 };
 
