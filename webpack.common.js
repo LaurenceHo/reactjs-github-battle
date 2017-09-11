@@ -2,6 +2,8 @@
  * Created by laurence-ho on 02/09/17.
  */
 const path = require ('path');
+const HtmlWebpackPlugin = require ('html-webpack-plugin');
+const CleanWebpackPlugin = require ('clean-webpack-plugin');
 
 module.exports = {
 	entry: './app/index.jsx',
@@ -37,6 +39,12 @@ module.exports = {
 				use: [ 'style-loader', 'css-loader' ]
 			}
 		]
-	}
+	},
+	plugins: [
+		new HtmlWebpackPlugin ({
+			template: 'app/index.html'
+		}),
+		new CleanWebpackPlugin ([ 'dist' ])
+	]
 };
 
