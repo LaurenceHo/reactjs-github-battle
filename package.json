@@ -11,12 +11,6 @@
   },
   "author": "",
   "license": "ISC",
-  "babel": {
-    "presets": [
-      "env",
-      "es2015"
-    ]
-  },
   "dependencies": {
     "@types/query-string": "^5.0.0",
     "@types/react": "^16.0.5",
