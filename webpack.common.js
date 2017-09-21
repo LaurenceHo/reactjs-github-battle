@@ -28,17 +28,8 @@ module.exports = {
 			{
 				enforce: "pre",
 				test: /\.js$/,
-				loader: "source-map-loader"
-			},
-			{
-				test: /\.js$/,
 				exclude: /(node_modules)/,
-				use: {
-					loader: 'babel-loader',
-					query: {
-						presets: [ "es2015" ]
-					}
-				}
+				loader: "source-map-loader"
 			},
 			{
 				test: /\.css$/,
