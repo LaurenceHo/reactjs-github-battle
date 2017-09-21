@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 export class Home extends React.Component {
-	render () {
+	render() {
 		return (
 			<div className='home-container'>
 				<h1>Github battle!</h1>

@@ -1,7 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
-export const PlayerPreview = (props) => {
+export const PlayerPreview = (props: any) => {
 	return (
 		<div>
 			<div className='column'>
@@ -15,9 +14,4 @@ export const PlayerPreview = (props) => {
 			{props.children}
 		</div>
 	);
-};
-
-PlayerPreview.propTypes = {
-	avatar: PropTypes.string.isRequired,
-	username: PropTypes.string.isRequired
 };

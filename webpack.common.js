@@ -3,10 +3,9 @@
  */
 const path = require ('path');
 const HtmlWebpackPlugin = require ('html-webpack-plugin');
-const CleanWebpackPlugin = require ('clean-webpack-plugin');
 
 module.exports = {
-	entry: './app/index.jsx',
+	entry: './src/index.tsx',
 	output: {
 		path: path.resolve (__dirname, 'dist'),
 		filename: '[name].bundle.js'
@@ -16,10 +15,21 @@ module.exports = {
 			path.join (__dirname, "dist"),
 			"node_modules"
 		],
-		extensions: [ '.js', '.jsx', '.json' ]
+		extensions: [ ".ts", ".tsx", '.js', '.json' ]
 	},
 	module: {
 		rules: [
+			// All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
+			{
+				test: /\.tsx?$/,
+				loader: "awesome-typescript-loader"
+			},
+			// All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+			{
+				enforce: "pre",
+				test: /\.js$/,
+				loader: "source-map-loader"
+			},
 			{
 				test: /\.js$/,
 				exclude: /(node_modules)/,
@@ -31,10 +41,6 @@ module.exports = {
 				}
 			},
 			{
-				test: /\.(jsx)$/,
-				use: 'babel-loader'
-			},
-			{
 				test: /\.css$/,
 				use: [ 'style-loader', 'css-loader' ]
 			}
@@ -42,9 +48,8 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin ({
-			template: 'app/index.html'
-		}),
-		new CleanWebpackPlugin ([ 'dist' ])
+			template: 'src/index.html'
+		})
 	]
 };
 

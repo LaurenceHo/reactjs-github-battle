@@ -1,42 +1,46 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { FetchPopularRepos } from '../utils/api';
 import { Loading } from './loading';
 
-export class Popular extends React.Component {
-	constructor (props) {
-		super (props);
+interface PopularState {
+	selectedLanguage: any,
+	repos: any
+}
+
+export class Popular extends React.Component<any, PopularState> {
+	constructor(props: any) {
+		super(props);
 		this.state = {
 			selectedLanguage: 'All',
 			repos: null
 		};
 
-		this.updateLanguage = this.updateLanguage.bind (this);
+		this.updateLanguage = this.updateLanguage.bind(this);
 	}
 
-	componentDidMount () {
-		this.updateLanguage (this.state.selectedLanguage);
+	componentDidMount() {
+		this.updateLanguage(this.state.selectedLanguage);
 	}
 
-	updateLanguage (lang) {
-		this.setState (() => {
+	updateLanguage(lang: string) {
+		this.setState(() => {
 			return {
 				selectedLanguage: lang,
 				repos: null
 			}
 		});
 
-		FetchPopularRepos (lang)
-			.then (function (repos) {
-				this.setState (() => {
+		FetchPopularRepos(lang)
+			.then(function (repos: string) {
+				this.setState(() => {
 					return {
 						repos: repos
 					}
 				});
-			}.bind (this));
+			}.bind(this));
 	}
 
-	render () {
+	render() {
 		return (
 			<div>
 				<SelectLanguage
@@ -50,16 +54,16 @@ export class Popular extends React.Component {
 }
 
 // Stateless Functional Components
-const SelectLanguage = (props) => {
-	const languages = [ 'All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python' ];
+const SelectLanguage = (props: SelectLanguageProps) => {
+	const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
 
 	return (
 		<ul className='languages'>
-			{languages.map ((lang) => {
+			{languages.map((lang) => {
 				return (
 					<li
-						style={lang === props.selectedLanguage ? { color: 'red' } : null}
-						onClick={props.onSelect.bind (null, lang)}
+						style={lang === props.selectedLanguage ? {color: 'red'} : null}
+						onClick={props.onSelect.bind(null, lang)}
 						key={lang}>
 						{lang}
 					</li>
@@ -69,15 +73,19 @@ const SelectLanguage = (props) => {
 	)
 };
 
-SelectLanguage.propTypes = {
-	selectedLanguage: PropTypes.string.isRequired,
-	onSelect: PropTypes.func.isRequired
+interface SelectLanguageProps {
+	selectedLanguage: string,
+	onSelect: any
 };
 
-const RepoGrid = (props) => {
+interface RepoGridProps {
+	repos: any[]
+}
+
+const RepoGrid = (props: RepoGridProps) => {
 	return (
 		<ul className='popular-list'>
-			{props.repos.map ((repo, index) => {
+			{props.repos.map((repo, index) => {
 				return (
 					<li key={repo.name} className='popular-item'>
 						<div className='popular-rank'>#{index + 1}</div>
@@ -98,8 +106,4 @@ const RepoGrid = (props) => {
 			})}
 		</ul>
 	)
-};
-
-RepoGrid.propTypes = {
-	repos: PropTypes.array.isRequired
 };

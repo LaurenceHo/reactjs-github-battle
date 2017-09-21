@@ -1,12 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import queryString from 'query-string';
+import * as queryString from 'query-string';
 import { Battle } from '../utils/api';
 import { PlayerPreview } from './playerReview';
 import { Loading } from './loading';
 
-const Profile = (props) => {
+interface ProfileProps {
+	info: any
+}
+
+const Profile = (props: ProfileProps) => {
 	const info = props.info;
 
 	return (
@@ -26,29 +29,32 @@ const Profile = (props) => {
 	)
 };
 
-Profile.propTypes = {
-	info: PropTypes.object.isRequired,
-};
+interface PlayerProps {
+	label: string,
+	score: number,
+	profile: object,
+}
 
-const Player = (props) => {
+const Player = (props: PlayerProps) => {
 	return (
 		<div>
 			<h1 className='header'>{props.label}</h1>
-			<h3 style={{ textAlign: 'center' }}>Score: {props.score}</h3>
+			<h3 style={{textAlign: 'center'}}>Score: {props.score}</h3>
 			<Profile info={props.profile}/>
 		</div>
 	)
 };
 
-Player.propTypes = {
-	label: PropTypes.string.isRequired,
-	score: PropTypes.number.isRequired,
-	profile: PropTypes.object.isRequired,
-};
+interface ResultsState {
+	winner: any,
+	loser: any,
+	error?: any,
+	loading: boolean
+}
 
-export class Results extends React.Component {
-	constructor (props) {
-		super (props);
+export class Results extends React.Component<any, ResultsState> {
+	constructor(props: any) {
+		super(props);
 
 		this.state = {
 			winner: null,
@@ -58,15 +64,15 @@ export class Results extends React.Component {
 		}
 	}
 
-	componentDidMount () {
-		const players = queryString.parse (this.props.location.search);
+	componentDidMount() {
+		const players = queryString.parse(this.props.location.search);
 
-		Battle ([
+		Battle([
 			players.playerOneName,
 			players.playerTwoName
-		]).then (function (players) {
-			if ( players === null ) {
-				return this.setState (() => {
+		]).then(function (players: any) {
+			if (players === null) {
+				return this.setState(() => {
 					return {
 						error: 'Looks like there was an error. Check that both users exist on Github.',
 						loading: false,
@@ -74,30 +80,27 @@ export class Results extends React.Component {
 				});
 			}
 
-			this.setState (() => {
+			this.setState(() => {
 				return {
-					error: null,
-					winner: players[ 0 ],
-					loser: players[ 1 ],
+					winner: players[0],
+					loser: players[1],
 					loading: false,
 				}
 			});
-		}.bind (this));
-
-		console.log (this);
+		}.bind(this));
 	}
 
-	render () {
+	render() {
 		const error = this.state.error;
 		const winner = this.state.winner;
 		const loser = this.state.loser;
 		const loading = this.state.loading;
 
-		if ( loading === true ) {
+		if (loading === true) {
 			return <Loading/>
 		}
 
-		if ( error ) {
+		if (error) {
 			return (
 				<div>
 					<p>{error}</p>
