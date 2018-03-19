@@ -3,7 +3,8 @@ const common = require ('./webpack.common.js');
 const HotModuleReplacementPlugin = require ('webpack/lib/HotModuleReplacementPlugin');
 
 module.exports = merge (common, {
-	devtool: 'source-map',
+	mode: 'development',
+	devtool: 'inline-source-map',
 	devServer: {
 		contentBase: './dist',
 		historyApiFallback: true,
