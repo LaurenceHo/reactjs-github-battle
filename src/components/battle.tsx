@@ -19,12 +19,9 @@ class PlayerInput extends React.Component<PlayerInputProps, PlayerInputState> {
 		this.state = {
 			username: ''
 		};
-
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleChange(event: any) {
+	handleChange = (event: any) => {
 		const value = event.target.value;
 
 		this.setState(() => {
@@ -32,16 +29,16 @@ class PlayerInput extends React.Component<PlayerInputProps, PlayerInputState> {
 				username: value
 			}
 		})
-	}
+	};
 
-	handleSubmit(event: any) {
+	handleSubmit = (event: any) => {
 		event.preventDefault();
 
 		this.props.onSubmit(
 			this.props.id,
 			this.state.username
 		);
-	}
+	};
 
 	render() {
 		return (
@@ -79,35 +76,29 @@ export class Battle extends React.Component<BattleProps, any> {
 			playerOneImage: null,
 			playerTwoImage: null
 		};
-
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleReset = this.handleReset.bind(this);
 	}
 
-	handleSubmit(id: string, username: string) {
+	handleSubmit = (id: string, username: string) => {
 		this.setState(() => {
 			const newState: any = {};
 			newState[id + 'Name'] = username;
 			newState[id + 'Image'] = 'https://github.com/' + username + '.png?size=200';
 			return newState;
 		});
-	}
+	};
 
-	handleReset(id: string) {
+	handleReset = (id: string) => {
 		this.setState(() => {
 			const newState: any = {};
 			newState[id + 'Name'] = '';
 			newState[id + 'Image'] = null;
 			return newState;
 		});
-	}
+	};
 
 	render() {
 		const match = this.props.match;
-		const playerOneName = this.state.playerOneName;
-		const playerTwoName = this.state.playerTwoName;
-		const playerOneImage = this.state.playerOneImage;
-		const playerTwoImage = this.state.playerTwoImage;
+		const { playerOneName, playerTwoName, playerOneImage, playerTwoImage } = this.state;
 
 		return (
 			<div>
@@ -123,7 +114,7 @@ export class Battle extends React.Component<BattleProps, any> {
 						username={playerOneName}>
 						<button
 							className='reset'
-							onClick={this.handleReset.bind(null, 'playerOne')}>
+							onClick={() => this.handleReset('playerOne')}>
 							Reset
 						</button>
 					</PlayerPreview>}
@@ -138,7 +129,7 @@ export class Battle extends React.Component<BattleProps, any> {
 						username={playerTwoName}>
 						<button
 							className='reset'
-							onClick={this.handleReset.bind(null, 'playerTWo')}>
+							onClick={() => this.handleReset('playerTWo')}>
 							Reset
 						</button>
 					</PlayerPreview>}
@@ -148,7 +139,7 @@ export class Battle extends React.Component<BattleProps, any> {
 					className='button'
 					to={{
 						pathname: match.url + '/results',
-						search: `?playerOneName=` + playerOneName + '&playerTwoName=' + playerTwoName
+						search: `?playerOneName=${playerOneName}&playerTwoName=${playerTwoName}`
 					}}>
 					Battle!
 				</Link>}

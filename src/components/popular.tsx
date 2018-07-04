@@ -14,15 +14,13 @@ export class Popular extends React.Component<any, PopularState> {
 			selectedLanguage: 'All',
 			repos: null
 		};
-
-		this.updateLanguage = this.updateLanguage.bind(this);
 	}
 
 	componentDidMount() {
 		this.updateLanguage(this.state.selectedLanguage);
 	}
 
-	updateLanguage(lang: string) {
+	updateLanguage = (lang: string) => {
 		this.setState(() => {
 			return {
 				selectedLanguage: lang,
@@ -31,23 +29,23 @@ export class Popular extends React.Component<any, PopularState> {
 		});
 
 		FetchPopularRepos(lang)
-			.then(function (repos: string) {
+			.then((repos: string) => {
 				this.setState(() => {
 					return {
 						repos: repos
 					}
 				});
-			}.bind(this));
-	}
+			});
+	};
 
 	render() {
+		const { selectedLanguage, repos } = this.state;
 		return (
 			<div>
 				<SelectLanguage
-					selectedLanguage={this.state.selectedLanguage}
-					onSelect={this.updateLanguage}
-				/>
-				{!this.state.repos ? <Loading/> : <RepoGrid repos={this.state.repos}/>}
+					selectedLanguage={selectedLanguage}
+					onSelect={this.updateLanguage}/>
+				{!repos ? <Loading/> : <RepoGrid repos={repos}/>}
 			</div>
 		);
 	}
@@ -62,7 +60,7 @@ const SelectLanguage = (props: SelectLanguageProps) => {
 			{languages.map((lang) => {
 				return (
 					<li
-						style={lang === props.selectedLanguage ? {color: 'red'} : null}
+						style={lang === props.selectedLanguage ? { color: 'red' } : null}
 						onClick={props.onSelect.bind(null, lang)}
 						key={lang}>
 						{lang}
@@ -76,7 +74,7 @@ const SelectLanguage = (props: SelectLanguageProps) => {
 interface SelectLanguageProps {
 	selectedLanguage: string,
 	onSelect: any
-};
+}
 
 interface RepoGridProps {
 	repos: any[]
@@ -97,7 +95,7 @@ const RepoGrid = (props: RepoGridProps) => {
 									alt={'Avatar for ' + repo.owner.login}
 								/>
 							</li>
-							<li><a href={repo.html_url}></a></li>
+							<li><a href={repo.html_url}/></li>
 							<li>@{repo.owner.login}</li>
 							<li>{repo.stargazers_count} stars</li>
 						</ul>

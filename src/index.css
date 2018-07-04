@@ -142,3 +142,8 @@ li {
 .reset:hover {
     cursor: pointer;
 }
+
+.loadingWording {
+    text-align: center;
+    font-size: 35px;
+}

@@ -1,16 +1,9 @@
 import * as React from 'react';
 
-const styles = {
-	content: {
-		textAlign: 'center',
-		fontSize: '35px'
-	}
-};
-
 interface LoadingProps {
 	text?: string,
 	speed?: number
-};
+}
 
 export class Loading extends React.Component<LoadingProps, any> {
 	public static defaultProps: Partial<LoadingProps> = {
@@ -30,21 +23,19 @@ export class Loading extends React.Component<LoadingProps, any> {
 
 	componentDidMount() {
 		const stopper = this.props.text + '...';
-		this.interval = window.setInterval(function () {
-			if (this.state.text === stopper) {
-				this.setState(() => {
+		this.interval = window.setInterval(() => {
+			this.state.text === stopper
+				? this.setState(() => {
 					return {
 						text: this.state.text
 					}
-				});
-			} else {
-				this.setState((prevState: any) => {
+				})
+				: this.setState((prevState: any) => {
 					return {
 						text: prevState.text + '.'
 					}
 				});
-			}
-		}.bind(this), this.props.speed);
+		}, this.props.speed);
 	}
 
 	componentWillUnmount() {
@@ -53,7 +44,7 @@ export class Loading extends React.Component<LoadingProps, any> {
 
 	render() {
 		return (
-			<p style={styles.content}>
+			<p className='loadingWording'>
 				{this.state.text}
 			</p>
 		);

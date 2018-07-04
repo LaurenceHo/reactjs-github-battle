@@ -39,7 +39,7 @@ const Player = (props: PlayerProps) => {
 	return (
 		<div>
 			<h1 className='header'>{props.label}</h1>
-			<h3 style={{textAlign: 'center'}}>Score: {props.score}</h3>
+			<h3 style={{ textAlign: 'center' }}>Score: {props.score}</h3>
 			<Profile info={props.profile}/>
 		</div>
 	)
@@ -70,7 +70,7 @@ export class Results extends React.Component<any, ResultsState> {
 		Battle([
 			players.playerOneName,
 			players.playerTwoName
-		]).then(function (players: any) {
+		]).then((players: any) => {
 			if (players === null) {
 				return this.setState(() => {
 					return {
@@ -87,14 +87,11 @@ export class Results extends React.Component<any, ResultsState> {
 					loading: false,
 				}
 			});
-		}.bind(this));
+		});
 	}
 
 	render() {
-		const error = this.state.error;
-		const winner = this.state.winner;
-		const loser = this.state.loser;
-		const loading = this.state.loading;
+		const { error, winner, loser, loading } = this.state;
 
 		if (loading === true) {
 			return <Loading/>

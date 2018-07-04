@@ -8,7 +8,7 @@ The latest version of Nodejs and npm need to be installed.
 
 ### How do I get set up? ###
 
-1.Clone the repo: 
+* Clone the repo: 
 ```
 git clone https://LaurenceHo@bitbucket.org/LaurenceHo/reactjs-github-battle.git
 ```
@@ -17,24 +17,28 @@ or
 git clone https://github.com/bluegray1015/reactjs-github-battle.git
 ```
 
-2.Install npm package: 
+* Install npm package: 
 ```
-npm install
+npm i
 ```
 
-3.Launch the app: 
+* Launch the app: 
 ```
 npm run start
 ```
 
-4.Visit in your browser: http://localhost:8080
+* Visit in your browser: http://localhost:8080
+
 
 ### Deploy to firebase
-1. Change the default project setting in the `.firebaserc`
-2. Then run:
-```
-npm run deploy
-```
+1. Run `npm run firebase-init`
+2. Visit https://console.firebase.google.com to create a new project
+3. Add the firebase project into your local configuration `npm run firebase-add`
+4. You may need to change the default project setting in the `./.firebaserc`
+5. If you want to deploy the whole project, run `npm run firebase-deploy`
 
 ### Live demo
 https://react-github-battle-demo.firebaseapp.com/
+
+### Acknowledgments
+https://tylermcginnis.com/
